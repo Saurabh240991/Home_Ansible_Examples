@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    tests:
+      test1:
+        name: A
+        age: 12
+        gender: M
+
+      test2:
+        name: K
+        age: 10
+        gender: F
+
+  tasks:
+   - name: setting fact Debian apache2
+     set_fact:
+       cacti_web_group: {{ tests[item]['name'] }}
+       cacti_web_owner: {{ tests[item]['age'] }}
+       cacti_web_root: {{ tests[item]['gender'] }}"
+     with_items: "{{ tests }}"

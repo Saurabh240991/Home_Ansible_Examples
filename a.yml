@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    my_list: "hello,how,are,you"
+ 
+  tasks:
+    - debug: msg="hi how are ? "         
+      when: 
+        - "{{ my_list | select('search','are') }}" == "are" 
+        
+    - debug: msg="hi how you ? "          
+      when: 
+        - "{{ my_list | select('search','you') }}" == "you" 
